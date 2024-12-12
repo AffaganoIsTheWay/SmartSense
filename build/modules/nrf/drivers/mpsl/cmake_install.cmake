@@ -1,8 +1,8 @@
-# Install script for directory: C:/ncs/v2.7.0/nrf/drivers/mpsl
+# Install script for directory: /home/giovanni/ncs/v2.7.0/nrf/drivers/mpsl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files/Zephyr-Kernel")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,11 +34,11 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/ncs/toolchains/ce3b5ff664/opt/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-objdump.exe")
+  set(CMAKE_OBJDUMP "/home/giovanni/ncs/toolchains/e9dba88316/opt/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/Utente/Desktop/nodic_project/central/build/modules/nrf/drivers/mpsl/clock_control/cmake_install.cmake")
+  include("/home/giovanni/Documenti/GitHub/SmartSense/build/modules/nrf/drivers/mpsl/clock_control/cmake_install.cmake")
 endif()
 

@@ -1,2 +1,2 @@
-osource "c:/users/utente/desktop/nodic_project/central/boards/shields/*/Kconfig.shield"
-osource "C:/ncs/v2.7.0/nrf/boards/shields/*/Kconfig.shield"
+osource "/home/giovanni/Documenti/GitHub/SmartSense/boards/shields/*/Kconfig.shield"
+osource "/home/giovanni/ncs/v2.7.0/nrf/boards/shields/*/Kconfig.shield"
