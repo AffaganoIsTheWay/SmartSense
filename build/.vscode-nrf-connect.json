@@ -1,0 +1,16 @@
+{
+  "board": "nrf52dk/nrf52832",
+  "boardRevision": "",
+  "boardDir": "c:/ncs/v2.7.0/zephyr/boards/nordic/nrf52dk",
+  "shouldBuild": true,
+  "optimizations": "none",
+  "cmakeArgs": [],
+  "confFiles": [
+    "prj.conf"
+  ],
+  "buildDirectory": "build",
+  "kconfigFragments": [],
+  "snippets": [],
+  "dtcOverlays": [],
+  "extraDtcOverlays": []
+}
