@@ -1,0 +1,13 @@
+# Target labels
+ SmartSense
+# Source files and their labels
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/CMakeFiles/SmartSense
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/CMakeFiles/SmartSense.rule
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/CMakeFiles/SmartSense-complete.rule
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/SmartSense-prefix/src/SmartSense-stamp/SmartSense-build.rule
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/SmartSense-prefix/src/SmartSense-stamp/SmartSense-configure.rule
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/SmartSense-prefix/src/SmartSense-stamp/SmartSense-download.rule
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/SmartSense-prefix/src/SmartSense-stamp/SmartSense-install.rule
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/SmartSense-prefix/src/SmartSense-stamp/SmartSense-mkdir.rule
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/SmartSense-prefix/src/SmartSense-stamp/SmartSense-patch.rule
+C:/Users/Utente/Documents/GitHub/SmartSense/build/_sysbuild/sysbuild/images/SmartSense-prefix/src/SmartSense-stamp/SmartSense-update.rule

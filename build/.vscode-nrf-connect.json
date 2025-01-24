@@ -1,14 +1,19 @@
 {
+  "toolchainPath": "c:\\ncs\\toolchains\\b620d30767",
+  "sdkPath": "c:\\ncs\\v2.9.0",
   "board": "nrf52dk/nrf52832",
+  "boardDirs": [
+    "c:\\ncs\\v2.7.0\\zephyr\\boards\\nordic\\nrf52dk"
+  ],
   "boardRevision": "",
-  "boardDir": "/home/giovanni/ncs/v2.7.0/zephyr/boards/nordic/nrf52dk",
+  "boardDir": "c:\\ncs\\v2.7.0\\zephyr\\boards\\nordic\\nrf52dk",
   "shouldBuild": true,
   "optimizations": "none",
   "cmakeArgs": [],
   "confFiles": [
     "prj.conf"
   ],
-  "buildDirectory": "build",
+  "buildDirectory": "..\\..\\..\\..\\..\\Users\\Utente\\Documents\\GitHub\\SmartSense\\build",
   "kconfigFragments": [],
   "snippets": [],
   "dtcOverlays": [],
