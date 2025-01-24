@@ -1,7 +1,0 @@
-default: SmartSense
-build_dir: C:/Users/Utente/Documents/GitHub/SmartSense/build
-domains:
-  - name: SmartSense
-    build_dir: C:/Users/Utente/Documents/GitHub/SmartSense/build/SmartSense
-flash_order:
-  - SmartSense
