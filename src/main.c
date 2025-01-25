@@ -10,7 +10,11 @@
 #include <stddef.h>
 #include <errno.h>
 #include <zephyr/kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
+#include <zephyr/drivers/gpio.h>
 #include <zephyr/sys/printk.h>
+#include <zephyr/drivers/uart.h>
 #include <string.h>
 
 #include <zephyr/bluetooth/bluetooth.h>
@@ -19,16 +23,6 @@
 #include <zephyr/bluetooth/uuid.h>
 #include <zephyr/bluetooth/gatt.h>
 #include <zephyr/sys/byteorder.h>
-
-static void start_scan(void);
-
-static struct bt_conn *default_conn;
-
-static struct bt_uuid_128 uuid = BT_UUID_INIT_128(0);
-static struct bt_gatt_discover_params discover_params;
-static struct bt_gatt_subscribe_params temperature_subscribe_params;
-static struct bt_gatt_subscribe_params humidity_subscribe_params;
-static struct bt_gatt_subscribe_params air_subscribe_params;
 
 /** @brief Sensor Service UUID. */
 #define BT_UUID_SERVICE_VAL \
@@ -52,6 +46,37 @@ static struct bt_gatt_subscribe_params air_subscribe_params;
 #define BT_UUID_HUMIDITY_CHARACTERISTIC BT_UUID_DECLARE_128(BT_UUID_HUMIDITY_CHARACTERISTIC_VAL)
 #define BT_UUID_AIR_CHARACTERISTIC BT_UUID_DECLARE_128(BT_UUID_AIR_CHARACTERISTIC_VAL)
 
+#define SLEEP_TIME_MS	10 * 60
+
+#define RECEIVE_BUFF_SIZE 10
+
+#define RECEIVE_TIMEOUT 10 * 60 * 1000
+
+typedef enum {
+    TEMPERATURE,
+    HUMIDITY,
+    AIR
+}State_t;
+
+State_t current_state = TEMPERATURE;
+
+const struct device *uart = DEVICE_DT_GET(DT_NODELABEL(uart0));
+
+static uint8_t tx_buf[2] = {0};
+
+static uint8_t rx_buf[RECEIVE_BUFF_SIZE] = {0};
+
+static void start_scan(void);
+
+static struct bt_conn *default_conn;
+
+static struct bt_uuid_128 uuid = BT_UUID_INIT_128(0);
+static struct bt_gatt_discover_params discover_params;
+static struct bt_gatt_subscribe_params temperature_subscribe_params;
+static struct bt_gatt_subscribe_params humidity_subscribe_params;
+static struct bt_gatt_subscribe_params air_subscribe_params;
+
+int count = 0;
 
 static uint8_t temperature_notify_func(struct bt_conn *conn,
 						   struct bt_gatt_subscribe_params *params,
@@ -64,9 +89,25 @@ static uint8_t temperature_notify_func(struct bt_conn *conn,
 		return BT_GATT_ITER_STOP;
 	}
 
+	int ret;
+
 	// Print the received data byte by byte
+	if (current_state == TEMPERATURE) {
+		printk("TEMPERATURE\n");
+		if (count == 0) {
+			tx_buf[0] = ((uint8_t *)data)[0];
+			tx_buf[1] = ((uint8_t *)data)[1];
+			ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
+			if (ret) {
+				return 1;
+			}
+			count ++;
+		} else if (count++ == 2) {
+			count = 0;
+		}
+	}
 	printk("[NOTIFICATION] Temperature: ");
-	printk("%u.%u ", ((uint8_t *)data)[0], ((uint8_t *)data)[1]);
+	printk("%d.%u ", ((uint8_t *)data)[0], ((uint8_t *)data)[1]);
 	printk("\n");
 
 	return BT_GATT_ITER_CONTINUE;
@@ -83,7 +124,23 @@ static uint8_t humidity_notify_func(struct bt_conn *conn,
 		return BT_GATT_ITER_STOP;
 	}
 
+	int ret;
+
 	// Print the received data byte by byte
+	if (current_state == HUMIDITY) {
+		printk("HUMIDITY\n");
+		if (count == 0) {
+			tx_buf[0] = ((uint8_t *)data)[0];
+			tx_buf[1] = 0;
+			ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
+			if (ret) {
+				return 1;
+			}
+			count ++;
+		} else if (count++ == 2) {
+			count = 0;
+		}
+	}
 	printk("[NOTIFICATION] Humidity: ");
 	printk("%u%%", ((uint8_t *)data)[0]);
 	printk("\n");
@@ -102,12 +159,54 @@ static uint8_t air_notify_func(struct bt_conn *conn,
 		return BT_GATT_ITER_STOP;
 	}
 
+	int ret;
+
 	// Print the received data byte by byte
+	if (current_state == AIR) {
+		printk("AIR");
+		if (count == 0) {
+			tx_buf[0] = ((uint8_t *)data)[0];
+			tx_buf[1] = ((uint8_t *)data)[1];
+			ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
+			if (ret) {
+				return 1;
+			}
+			count ++;
+		} else if (count++ == 2) {
+			count = 0;
+		}
+	}
 	printk("[NOTIFICATION] Air: ");
-	printk("%u ppm", ((uint8_t *)data)[0]);
+	printk("%u ppm", ((uint8_t *)data)[0] + (((uint8_t *)data)[1]*256));
 	printk("\n");
 
 	return BT_GATT_ITER_CONTINUE;
+}
+
+static void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
+{
+	int ret;
+	switch (evt->type) {
+
+		case UART_RX_RDY:
+			if ((evt->data.rx.len) == 1) {
+				if (evt->data.rx.buf[evt->data.rx.offset] == 1) {
+					current_state = TEMPERATURE;
+				} else if (evt->data.rx.buf[evt->data.rx.offset] == 2) {
+					current_state = HUMIDITY;
+				} else if (evt->data.rx.buf[evt->data.rx.offset] == 3) {
+					current_state = AIR;
+				}
+			}
+		break;
+
+		case UART_RX_DISABLED:
+			uart_rx_enable(dev, rx_buf, sizeof rx_buf, RECEIVE_TIMEOUT);
+		break;
+
+		default:
+		break;
+	}
 }
 
 static uint8_t discover_func(struct bt_conn *conn,
@@ -342,6 +441,17 @@ BT_CONN_CB_DEFINE(conn_callbacks) = {
 int main(void)
 {
 	int err;
+	int ret;
+    
+	if (!device_is_ready(uart)) {
+		printk("UART device not ready\n");
+		return 1;
+	}
+
+	ret = uart_callback_set(uart, uart_cb, NULL);
+	if (ret) {
+		return 1;
+	}
 
 	err = bt_enable(NULL);
 	if (err) {
@@ -352,6 +462,11 @@ int main(void)
 	printk("Bluetooth initialized\n");
 
 	start_scan();
+
+	ret = uart_rx_enable(uart, rx_buf, sizeof rx_buf, RECEIVE_TIMEOUT);
+	if (ret) {
+		return 1;
+	}
 
 	return 0;
 }
