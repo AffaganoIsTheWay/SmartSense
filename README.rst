@@ -19,7 +19,11 @@ Pre-requisits
 7. TI driver library
 8. Visual Studio Code
 
-Building and Running
+Getting Started
 ********************
+
+Connect NordicThingy: 52 and the BoosterpackXL boards to a power supply.
+Ports P0.08 and P0.06 of NordicThingy: 52 are connected to ports J1.4 and J1.3 of the BoosterpackXL board respectively.
+Run nordic.c, texas.c
 
 
