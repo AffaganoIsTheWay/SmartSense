@@ -46,8 +46,6 @@
 #define BT_UUID_HUMIDITY_CHARACTERISTIC BT_UUID_DECLARE_128(BT_UUID_HUMIDITY_CHARACTERISTIC_VAL)
 #define BT_UUID_AIR_CHARACTERISTIC BT_UUID_DECLARE_128(BT_UUID_AIR_CHARACTERISTIC_VAL)
 
-#define SLEEP_TIME_MS	10 * 60
-
 #define RECEIVE_BUFF_SIZE 10
 
 #define RECEIVE_TIMEOUT 10 * 60 * 1000
@@ -163,7 +161,7 @@ static uint8_t air_notify_func(struct bt_conn *conn,
 
 	// Print the received data byte by byte
 	if (current_state == AIR) {
-		printk("AIR");
+		printk("AIR\n");
 		if (count == 0) {
 			tx_buf[0] = ((uint8_t *)data)[0];
 			tx_buf[1] = ((uint8_t *)data)[1];
@@ -185,10 +183,10 @@ static uint8_t air_notify_func(struct bt_conn *conn,
 
 static void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
 {
-	int ret;
 	switch (evt->type) {
 
 		case UART_RX_RDY:
+			printk("Getting Value: %u\n", evt->data.rx.buf[evt->data.rx.offset]);
 			if ((evt->data.rx.len) == 1) {
 				if (evt->data.rx.buf[evt->data.rx.offset] == 1) {
 					current_state = TEMPERATURE;
