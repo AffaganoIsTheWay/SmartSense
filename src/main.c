@@ -74,8 +74,6 @@ static struct bt_gatt_subscribe_params temperature_subscribe_params;
 static struct bt_gatt_subscribe_params humidity_subscribe_params;
 static struct bt_gatt_subscribe_params air_subscribe_params;
 
-int count = 0;
-
 static uint8_t temperature_notify_func(struct bt_conn *conn,
 						   struct bt_gatt_subscribe_params *params,
 						   const void *data, uint16_t length)
@@ -92,16 +90,11 @@ static uint8_t temperature_notify_func(struct bt_conn *conn,
 	// Print the received data byte by byte
 	if (current_state == TEMPERATURE) {
 		printk("TEMPERATURE\n");
-		if (count == 0) {
-			tx_buf[0] = ((uint8_t *)data)[0];
-			tx_buf[1] = ((uint8_t *)data)[1];
-			ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
-			if (ret) {
-				return 1;
-			}
-			count ++;
-		} else if (count++ == 2) {
-			count = 0;
+		tx_buf[0] = ((uint8_t *)data)[0];
+		tx_buf[1] = ((uint8_t *)data)[1];
+		ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
+		if (ret) {
+			return 1;
 		}
 	}
 	printk("[NOTIFICATION] Temperature: ");
@@ -127,17 +120,13 @@ static uint8_t humidity_notify_func(struct bt_conn *conn,
 	// Print the received data byte by byte
 	if (current_state == HUMIDITY) {
 		printk("HUMIDITY\n");
-		if (count == 0) {
-			tx_buf[0] = ((uint8_t *)data)[0];
-			tx_buf[1] = 0;
-			ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
-			if (ret) {
-				return 1;
-			}
-			count ++;
-		} else if (count++ == 2) {
-			count = 0;
+		tx_buf[0] = ((uint8_t *)data)[0];
+		tx_buf[1] = 0;
+		ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
+		if (ret) {
+			return 1;
 		}
+
 	}
 	printk("[NOTIFICATION] Humidity: ");
 	printk("%u%%", ((uint8_t *)data)[0]);
@@ -162,16 +151,11 @@ static uint8_t air_notify_func(struct bt_conn *conn,
 	// Print the received data byte by byte
 	if (current_state == AIR) {
 		printk("AIR\n");
-		if (count == 0) {
-			tx_buf[0] = ((uint8_t *)data)[0];
-			tx_buf[1] = ((uint8_t *)data)[1];
-			ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
-			if (ret) {
-				return 1;
-			}
-			count ++;
-		} else if (count++ == 2) {
-			count = 0;
+		tx_buf[0] = ((uint8_t *)data)[0];
+		tx_buf[1] = ((uint8_t *)data)[1];
+		ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
+		if (ret) {
+			return 1;
 		}
 	}
 	printk("[NOTIFICATION] Air: ");
