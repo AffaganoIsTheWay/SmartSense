@@ -1,5 +1,3 @@
-.. _bluetooth_central:
-
 SmartSense
 ##################
 
