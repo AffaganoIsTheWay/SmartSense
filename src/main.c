@@ -24,6 +24,8 @@
 #include <zephyr/bluetooth/gatt.h>
 #include <zephyr/sys/byteorder.h>
 
+// Initialization UUID
+
 /** @brief Sensor Service UUID. */
 #define BT_UUID_SERVICE_VAL \
 	BT_UUID_128_ENCODE(0xEF680200, 0x9B35, 0x4933, 0x9B10, 0x52FFA9740042)
@@ -46,16 +48,20 @@
 #define BT_UUID_HUMIDITY_CHARACTERISTIC BT_UUID_DECLARE_128(BT_UUID_HUMIDITY_CHARACTERISTIC_VAL)
 #define BT_UUID_AIR_CHARACTERISTIC BT_UUID_DECLARE_128(BT_UUID_AIR_CHARACTERISTIC_VAL)
 
+// Fixed value for UART
 #define RECEIVE_BUFF_SIZE 10
 
 #define RECEIVE_TIMEOUT 10 * 60 * 1000
 
+// Initialization Finate state machine
 typedef enum {
     TEMPERATURE,
     HUMIDITY,
     AIR
 }State_t;
 
+
+// Initialization inizial values
 State_t current_state = TEMPERATURE;
 
 const struct device *uart = DEVICE_DT_GET(DT_NODELABEL(uart0));
@@ -74,6 +80,11 @@ static struct bt_gatt_subscribe_params temperature_subscribe_params;
 static struct bt_gatt_subscribe_params humidity_subscribe_params;
 static struct bt_gatt_subscribe_params air_subscribe_params;
 
+/* Callback Temperature:
+	Called when a Temperature Characteristic data arrive though BT. 
+	if TEMPERATURE state send value over UART,
+	then display recived data
+*/
 static uint8_t temperature_notify_func(struct bt_conn *conn,
 						   struct bt_gatt_subscribe_params *params,
 						   const void *data, uint16_t length)
@@ -90,8 +101,10 @@ static uint8_t temperature_notify_func(struct bt_conn *conn,
 	// Print the received data byte by byte
 	if (current_state == TEMPERATURE) {
 		printk("TEMPERATURE\n");
+		// Fill up TX buffer
 		tx_buf[0] = ((uint8_t *)data)[0];
 		tx_buf[1] = ((uint8_t *)data)[1];
+		// Send Data
 		ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
 		if (ret) {
 			return 1;
@@ -104,6 +117,11 @@ static uint8_t temperature_notify_func(struct bt_conn *conn,
 	return BT_GATT_ITER_CONTINUE;
 }
 
+/* Callback Humidity:
+	Called when a Humidity Characteristic data arrive though BT. 
+	if Humidity state send value over UART,
+	then display recived data
+*/
 static uint8_t humidity_notify_func(struct bt_conn *conn,
 						   struct bt_gatt_subscribe_params *params,
 						   const void *data, uint16_t length)
@@ -120,8 +138,10 @@ static uint8_t humidity_notify_func(struct bt_conn *conn,
 	// Print the received data byte by byte
 	if (current_state == HUMIDITY) {
 		printk("HUMIDITY\n");
+		// Fill up TX buffer
 		tx_buf[0] = ((uint8_t *)data)[0];
 		tx_buf[1] = 0;
+		// Send Data
 		ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
 		if (ret) {
 			return 1;
@@ -135,6 +155,11 @@ static uint8_t humidity_notify_func(struct bt_conn *conn,
 	return BT_GATT_ITER_CONTINUE;
 }
 
+/* Callback AIR:
+	Called when a Air Characteristic data arrive though BT. 
+	if Air state send value over UART,
+	then display recived data
+*/
 static uint8_t air_notify_func(struct bt_conn *conn,
 						   struct bt_gatt_subscribe_params *params,
 						   const void *data, uint16_t length)
@@ -151,8 +176,10 @@ static uint8_t air_notify_func(struct bt_conn *conn,
 	// Print the received data byte by byte
 	if (current_state == AIR) {
 		printk("AIR\n");
+		// Send Data
 		tx_buf[0] = ((uint8_t *)data)[0];
 		tx_buf[1] = ((uint8_t *)data)[1];
+		// Send Data
 		ret = uart_tx(uart, tx_buf, sizeof(tx_buf), SYS_FOREVER_MS);
 		if (ret) {
 			return 1;
@@ -165,10 +192,13 @@ static uint8_t air_notify_func(struct bt_conn *conn,
 	return BT_GATT_ITER_CONTINUE;
 }
 
+/* Callback UART interrupt:
+	Called when a data arrive at the RX or it stop listening due to timeout
+*/
 static void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
 {
 	switch (evt->type) {
-
+		/* Data arrived at the RX */
 		case UART_RX_RDY:
 			printk("Getting Value: %u\n", evt->data.rx.buf[evt->data.rx.offset]);
 			if ((evt->data.rx.len) == 1) {
@@ -181,7 +211,7 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 				}
 			}
 		break;
-
+		/* RX Timeout: restart RX */
 		case UART_RX_DISABLED:
 			uart_rx_enable(dev, rx_buf, sizeof rx_buf, RECEIVE_TIMEOUT);
 		break;
@@ -191,6 +221,13 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 	}
 }
 
+/* Discover Function:
+	It will search the attribute defined by UUID in the BT messages of the device.
+	First will search the attribute handle of the ENVIROMENT SERVICE,
+	then in the Enviroment Service slice it will search for the handle of
+	Temperature, Humiodity and Air Characteristic,
+	the subscrive to the notification service
+*/
 static uint8_t discover_func(struct bt_conn *conn,
 							 const struct bt_gatt_attr *attr,
 							 struct bt_gatt_discover_params *params)
@@ -310,6 +347,11 @@ static uint8_t discover_func(struct bt_conn *conn,
 	return BT_GATT_ITER_STOP;
 }
 
+/* Callback function when a device is found:
+	First will retrive device information,
+	then chack if it is the thingy device,
+	in case will stop the scan and establish a connection
+*/
 static void device_found(const bt_addr_le_t *addr, int8_t rssi, uint8_t type,
 			 struct net_buf_simple *ad)
 {
@@ -326,17 +368,21 @@ static void device_found(const bt_addr_le_t *addr, int8_t rssi, uint8_t type,
 		return;
 	}
 
+	/* Retrive Device Information */
 	bt_addr_le_to_str(addr, addr_str, sizeof(addr_str));
 	printk("Device found: %s (RSSI %d)\n", addr_str, rssi);
 
-	if (addr_str[0] != 'C'){
+	/* Check if is Thingy's address*/
+	if (strncmp(addr_str, "CA:D7:29:21:6F:C1", 17)){
 		return;
 	}
 
+	/* Stop the scan */
 	if (bt_le_scan_stop()) {
 		return;
 	}
 
+	/* Enstablish a connection */
 	err = bt_conn_le_create(addr, BT_CONN_LE_CREATE_CONN,
 				BT_LE_CONN_PARAM_DEFAULT, &default_conn);
 	if (err) {
@@ -345,6 +391,7 @@ static void device_found(const bt_addr_le_t *addr, int8_t rssi, uint8_t type,
 	}
 }
 
+// Function to start the scan for Bluetooth device
 static void start_scan(void)
 {
 	int err;
@@ -359,6 +406,10 @@ static void start_scan(void)
 	printk("Scanning successfully started\n");
 }
 
+/* Callback function for connect interrupt:
+	check if there was an error while connecting
+	then initialize the discovery function
+*/
 static void connected(struct bt_conn *conn, uint8_t conn_err)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
@@ -397,6 +448,11 @@ static void connected(struct bt_conn *conn, uint8_t conn_err)
 	}
 }
 
+/* Callback in case of BLE disconnect interrupt:
+	Will display a disconnection message with the address of the device
+	then clear the connection parameter
+	then start the scan to connect to another device	
+*/
 static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
@@ -415,6 +471,8 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 	start_scan();
 }
 
+/* Set the callback for BLE to connected and disconnected functions
+*/
 BT_CONN_CB_DEFINE(conn_callbacks) = {
 	.connected = connected,
 	.disconnected = disconnected,
@@ -425,16 +483,19 @@ int main(void)
 	int err;
 	int ret;
     
+	// Inizialize UART and check if it works properly
 	if (!device_is_ready(uart)) {
 		printk("UART device not ready\n");
 		return 1;
 	}
 
+	// Set UART callback interrupt function
 	ret = uart_callback_set(uart, uart_cb, NULL);
 	if (ret) {
 		return 1;
 	}
 
+	// Enable Bluetooth
 	err = bt_enable(NULL);
 	if (err) {
 		printk("Bluetooth init failed (err %d)\n", err);
@@ -443,8 +504,10 @@ int main(void)
 
 	printk("Bluetooth initialized\n");
 
+	// Start scan for Bluetooth Device
 	start_scan();
 
+	// Initialize UART reciver (pointer to uart devicetree, reciver buffer, buffer size, how much to wait for incoming data)
 	ret = uart_rx_enable(uart, rx_buf, sizeof rx_buf, RECEIVE_TIMEOUT);
 	if (ret) {
 		return 1;
