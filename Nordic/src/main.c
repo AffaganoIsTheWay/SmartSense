@@ -221,6 +221,7 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 	}
 }
 
+uint16_t temperature_handle, humidity_handle;
 /* Discover Function:
 	It will search the attribute defined by UUID in the BT messages of the device.
 	First will search the attribute handle of the ENVIROMENT SERVICE,
@@ -233,6 +234,7 @@ static uint8_t discover_func(struct bt_conn *conn,
 							 struct bt_gatt_discover_params *params)
 {
 	int err;
+	
 
 	if (!attr)
 	{
@@ -259,6 +261,7 @@ static uint8_t discover_func(struct bt_conn *conn,
 	{
 		memcpy(&uuid, BT_UUID_HUMIDITY_CHARACTERISTIC, sizeof(uuid));
 		discover_params.uuid = &uuid.uuid;
+		temperature_handle = attr->handle + 2;
 		discover_params.start_handle = attr->handle; 
 		discover_params.type = BT_GATT_DISCOVER_CHARACTERISTIC;
 		temperature_subscribe_params.value_handle = bt_gatt_attr_value_handle(attr);
@@ -273,6 +276,7 @@ static uint8_t discover_func(struct bt_conn *conn,
 	{
 		memcpy(&uuid, BT_UUID_AIR_CHARACTERISTIC, sizeof(uuid));
 		discover_params.uuid = &uuid.uuid;
+		humidity_handle = attr->handle + 2;
 		discover_params.start_handle = attr->handle;
 		discover_params.type = BT_GATT_DISCOVER_CHARACTERISTIC;
 		humidity_subscribe_params.value_handle = bt_gatt_attr_value_handle(attr);
@@ -301,7 +305,8 @@ static uint8_t discover_func(struct bt_conn *conn,
 	{
 		temperature_subscribe_params.notify = temperature_notify_func;
 		temperature_subscribe_params.value = BT_GATT_CCC_NOTIFY;
-		temperature_subscribe_params.ccc_handle = 34;
+		printk("Temperature handle: %u\n", temperature_handle);
+		temperature_subscribe_params.ccc_handle = temperature_handle;
 
 		err = bt_gatt_subscribe(conn, &temperature_subscribe_params);
 		if (err && err != -EALREADY)
@@ -315,7 +320,7 @@ static uint8_t discover_func(struct bt_conn *conn,
 
 		humidity_subscribe_params.notify = humidity_notify_func;
 		humidity_subscribe_params.value = BT_GATT_CCC_NOTIFY;
-		humidity_subscribe_params.ccc_handle = 40;
+		humidity_subscribe_params.ccc_handle = humidity_handle;
 
 		err = bt_gatt_subscribe(conn, &humidity_subscribe_params);
 		if (err && err != -EALREADY)
