@@ -305,7 +305,6 @@ static uint8_t discover_func(struct bt_conn *conn,
 	{
 		temperature_subscribe_params.notify = temperature_notify_func;
 		temperature_subscribe_params.value = BT_GATT_CCC_NOTIFY;
-		printk("Temperature handle: %u\n", temperature_handle);
 		temperature_subscribe_params.ccc_handle = temperature_handle;
 
 		err = bt_gatt_subscribe(conn, &temperature_subscribe_params);
