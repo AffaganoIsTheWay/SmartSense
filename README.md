@@ -5,6 +5,7 @@ Table of contents:
 - Pre-requisits
 - Getting Started
 - Illustrations
+- Powerpoint Presentation & Video link
 
 ***
 Overview
@@ -36,3 +37,9 @@ Illustrations
 ![WhatsApp Image 2025-01-25 at 17 58 54(1)](https://github.com/user-attachments/assets/984bb302-fd9f-4567-9c96-3622faf180af)
 ![WhatsApp Image 2025-01-25 at 17 58 54](https://github.com/user-attachments/assets/bf45d9d5-d4f8-447c-9cda-a076ba398405)
 ****
+Powerpoint Presentation & Video link
+
+-Powerpoint: 
+-Video: 
+****
+Colaboratores?
