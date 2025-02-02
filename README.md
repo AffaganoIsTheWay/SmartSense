@@ -1,11 +1,18 @@
-**SmartSense**
-
-Overview
+## SmartSense
 ***
-SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide level (ppm), humidity and temperature. Developed using NordicThingy nrf52, NordicThingy:52 and BoosterpackXL kits in C language, it can be deployed by any operating system. SmartSense is great for people who like to keep a constant update of their environment's condition. The bluetooth sensor of the NordicThingy:52 allows us to actively update the state of the environment according to time of request. The display and joystick from the BoosterpackXL kit displays them in a clear and precise form, with the joystick allowing to shuffle to the parameter the user wants to see. 
+Table of contents:
+- Overview
+- Pre-requisits
+- Getting Started
+- Illustrations
 
+***
+Overview
+
+SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide level (ppm), humidity and temperature. Developed using NordicThingy nrf52, NordicThingy:52 and BoosterpackXL kits in C language, it can be deployed by any operating system. SmartSense is great for people who like to keep a constant update of their environment's condition. The bluetooth sensor of the NordicThingy:52 allows us to actively update the state of the environment according to time of request. The display and joystick from the BoosterpackXL kit displays them in a clear and precise form, with the joystick allowing to shuffle to the parameter the user wants to see. 
+***
 Pre-requisits
-************
+
 1. NordicThingy:52 IOT sensor kit
 2. NordicThingy nRF52 development kit
 3. BOOSTXL-EDUMKII Educational BoosterPack
@@ -14,15 +21,14 @@ Pre-requisits
 6. Code composer studio
 7. TI driver library
 8. Visual Studio Code
-
+***
 Getting Started
-********************
 
-Connect NordicThingy: 52 and the BoosterpackXL boards to a power supply.
-
-Ports P0.08 and P0.06 of NordicThingy: 52 are connected to ports J1.4 and J1.3 of the BoosterpackXL board respectively.
-
-Run nordic.c, texas.c
+1. Connect NordicThingy: 52 and the BoosterpackXL boards to a power supply.
+2. Ports P0.08 and P0.06 of NordicThingy: 52 are connected to ports J1.4 and J1.3 of the BoosterpackXL board respectively.
+3. Run nordic.c, texas.c
+***
+Illustrations
 
 ![WhatsApp Image 2025-01-25 at 17 58 55](https://github.com/user-attachments/assets/e2e87625-18a6-4f4d-934e-8101017b1eb6)
 ![WhatsApp Image 2025-01-25 at 17 58 54(3)](https://github.com/user-attachments/assets/35f27e1b-5c13-4a1b-b196-42a63d383394)
