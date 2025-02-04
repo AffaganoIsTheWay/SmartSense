@@ -126,8 +126,8 @@ Illustrations
 ****
 Powerpoint Presentation & Video link
 
-    -Video:
-    -Power Point:
+- Demonstration video: https://drive.google.com/file/d/1XCggXwoIA0TfUid-i-VX_US3aubdrWZ0/view?usp=share_link
+- Power Point:
 ****
 Colaboratores
 
