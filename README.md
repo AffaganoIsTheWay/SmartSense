@@ -22,6 +22,9 @@ Pre-requisites
     3. Nordic nRF52 development kit
     4. Texas Instruments Educational BoosterPack MKII
     5. 2 MtF jumper wires
+    6. Micro usb power supply for MSP432
+    7. Battery or micro usb power supply for the nrf52dk
+    
     
   Software
   
