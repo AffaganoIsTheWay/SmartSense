@@ -61,7 +61,7 @@ Project Layout
     |     |──prj.conf        #File that contain which Library the project shold contain
     |     |──sample.yaml
     |
-    |──Texas_Instruments
+    |──Texas_Instruments     #Folder for MSP432p401R and BoosterPack MKII project
     |     |
     |     |──launches
     |     |──settings
