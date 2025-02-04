@@ -2,6 +2,7 @@
 ***
 Table of contents:
 - Overview
+- Finite State Machine Diagram
 - Pre-requisites
 - Project Layout
 - Getting Started
@@ -12,6 +13,18 @@ Table of contents:
 Overview
 
 SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide concentration (ppm), humidity and temperature. Developed using Nordic nrf52 development kit, Nordic Thingy:52 and TI Educational BoosterPack MKII kits in C language, it can be deployed by any operating system. SmartSense is great for people who like to keep a constant update of their environment's condition. The bluetooth sensor of the Nordic Thingy:52 allows us to actively update the state of the environment according to time of request. The display and joystick from the BoosterPack kit displays them in a clear and intuitive way, with the joystick allowing the user to cycle through the values the user wants to see. 
+***
+Finite State Machine Diagram
+
+
+Working of MSP432 Boosterpack Developmental Kit:
+
+![WhatsApp Image 2025-02-04 at 19 39 52](https://github.com/user-attachments/assets/30cd4935-e904-4707-91aa-a64bb792935b)
+
+Working of NordicThingy 52 and Nordic nrf 52:
+
+![Screenshot 2025-02-04 at 19-26-02 Claude](https://github.com/user-attachments/assets/32d1d6ea-f3de-45eb-8db7-9ebb8b076546)
+
 ***
 Pre-requisites
 
