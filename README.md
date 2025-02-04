@@ -16,7 +16,7 @@ SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide 
 ***
 Finite State Machines
 
-blob:https://web.whatsapp.com/643e0dc2-505e-4529-aaf9-52e66428890d
+
 
 Pre-requisits
 
