@@ -3,6 +3,7 @@
 Table of contents:
 - Overview
 - Pre-requisits
+- Project Layout
 - Getting Started
 - Illustrations
 - Powerpoint Presentation & Video link
@@ -14,14 +15,70 @@ SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide 
 ***
 Pre-requisits
 
-1. NordicThingy:52 IOT sensor kit
-2. NordicThingy nRF52 development kit
-3. BOOSTXL-EDUMKII Educational BoosterPack
-4. J-link software from https://www.segger.com/downloads/jlink/
-5. nRF desktop application (SDK version)
-6. Code composer studio
-7. TI driver library
-8. Visual Studio Code
+  Hardware
+  
+    1. NordicThingy:52 IOT sensor kit
+    2. NordicThingy nRF52 development kit
+    3. BOOSTXL-EDUMKII Educational BoosterPack
+    
+  Software
+  
+    1. J-link software from https://www.segger.com/downloads/jlink/
+    2. nRF desktop application (SDK version)
+    3. Code composer studio
+    4. TI driver library
+    5. Visual Studio Code
+***
+Project Layout
+
+    SmartSense
+    |
+    |── Nordic
+    |     |
+    |     |── src
+    |     |     |
+    |     |     |── main.c
+    |     |
+    |     |──CMakeLists. txt
+    |     |──prj.conf
+    |     |──sample.yaml
+    |
+    |──Texas_Instruments
+    |     |
+    |     |── .launches
+    |     |       |
+    |     |       |── uart_example.launch
+    |     |
+    |     |── .settings
+    |     |       |
+    |     |       |── org.eclipse.cdt.codan.core.prefs
+    |     |       |── org.eclipse.cdt.debug.core.prefs
+    |     |       |── org.eclipse.core.resources.prefs
+    |     |
+    |     |──LcdDriver
+    |     |       |
+    |     |       |── Crystalfontz128x128_ST7735.c
+    |     |       |── Crystalfontz128x128_ST7735.h
+    |     |       |── HAL_MSP_EXP432P401R_Crystalfontz128x128_ST7735.c
+    |     |       |── HAL_MSP_EXP432P401R_Crystalfontz128x128_ST7735.h
+    |     |
+    |     |── targetConfigs
+    |     |       |
+    |     |       |── MSP432P401R.ccxml
+    |     |       |── readme.txt
+    |     |
+    |     |── .ccsproject
+    |     |── .cproject
+    |     |── .project
+    |     |── main.c
+    |     |── msp432p401r.cmd
+    |     |── startup_msp432p401r_ccs.c
+    |     |── startup_msp432p401r.c
+    |
+    |── .gitignore
+    |── PowerPointPresentation.pptx
+    |── README.md
+
 ***
 Getting Started
 
@@ -42,4 +99,9 @@ Powerpoint Presentation & Video link
 -Powerpoint: 
 -Video: 
 ****
-Colaboratores?
+Colaboratores
+
+- Giovanni Vitiello
+- Trisha Agrawal
+- Christian Li Sivertsen
+- Frederico Gasperi
