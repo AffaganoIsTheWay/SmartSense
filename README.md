@@ -2,8 +2,7 @@
 ***
 Table of contents:
 - Overview
-- Finite State Machine
-- Pre-requisits
+- Pre-requisites
 - Project Layout
 - Getting Started
 - Illustrations
@@ -12,20 +11,16 @@ Table of contents:
 ***
 Overview
 
-SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide level (ppm), humidity and temperature. Developed using NordicThingy nrf52, NordicThingy:52 and BoosterpackXL kits in C language, it can be deployed by any operating system. SmartSense is great for people who like to keep a constant update of their environment's condition. The bluetooth sensor of the NordicThingy:52 allows us to actively update the state of the environment according to time of request. The display and joystick from the BoosterpackXL kit displays them in a clear and precise form, with the joystick allowing to shuffle to the parameter the user wants to see. 
+SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide concentration (ppm), humidity and temperature. Developed using Nordic nrf52 development kit, Nordic Thingy:52 and TI Educational BoosterPack MKII kits in C language, it can be deployed by any operating system. SmartSense is great for people who like to keep a constant update of their environment's condition. The bluetooth sensor of the Nordic Thingy:52 allows us to actively update the state of the environment according to time of request. The display and joystick from the BoosterPack kit displays them in a clear and intuitive way, with the joystick allowing the user to cycle through the values the user wants to see. 
 ***
-Finite State Machines
-
-
-
-Pre-requisits
+Pre-requisites
 
   Hardware
   
-    1. Texas Instruments MSP432P401R microcontroller
-    2. NordicThingy:52 IOT sensor kit
-    3. NordicThingy nRF52 development kit
-    4. BOOSTXL-EDUMKII Educational BoosterPack
+    1. Texas Instruments MSP432P401R LaunchPad Development Kit
+    2. Nordic Thingy:52 IOT sensor kit
+    3. Nordic nRF52 development kit
+    4. Texas Instruments Educational BoosterPack MKII
     5. 2 MtF jumper wires
     
   Software
@@ -77,7 +72,7 @@ Getting Started
 git clone https://github.com/AffaganoIsTheWay/SmartSense.git
 ```
 
-For the Texas Instrument board
+For the Texas Instruments MSP432 board
 1. Import the Texas_Instrument folder in your local CCS Workspace
 2. Downloand and unzip TI driver Library (https://drive.google.com/file/d/1_5TsECed3wNJpIpllxYYdD06aFbkk7Fc/view)
 3. Open CSS and left click on Project Folder to select Properties
@@ -90,7 +85,7 @@ For the Texas Instrument board
 10. Import the Texas_Instrument folder in your local CCS Workspace
 11. Build and flash on the TI board
 
-For the Nordic Board
+For the Nordic nrf52dk Board
 1. Install the nRF Connect for VS Code Extension Pack (https://marketplace.visualstudio.com/items?itemName=nordic-semiconductor.nrf-connect-extension-pack)
 2. From the nRF connect tab install toolchain and SDK
 3. Download and install Segger j-link
@@ -98,8 +93,12 @@ For the Nordic Board
 5. Build and Flash on the Nordic board
 
 For the Hardware
-1. Connect the Educational Boosterpack to the MSP432P401R
-2. Ports P0.08 and P0.06 of nRF52 are connected to ports J1.4 and J1.3 of the BoosterpackXL board respectively using the wires
+1. Connect the Educational BoosterPack to the MSP432
+2. Connect ports P0.08 and P0.06 of nRF52 to ports J1.4 and J1.3 of the BoosterPack board respectively using the wires
+3. Turn on the Nordic Thingy:52
+4. Turn on the Nordic nrf52dk. Make sure either it has a battery with power or is connected to a power supply via the micro usb port.
+5. Connect a power supply to the MSP432 board
+6. Ready to use!
 
 ***
 Illustrations
