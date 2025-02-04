@@ -17,9 +17,11 @@ Pre-requisits
 
   Hardware
   
-    1. NordicThingy:52 IOT sensor kit
-    2. NordicThingy nRF52 development kit
-    3. BOOSTXL-EDUMKII Educational BoosterPack
+    1. Texas Instruments MSP432P401R microcontroller
+    2. NordicThingy:52 IOT sensor kit
+    3. NordicThingy nRF52 development kit
+    4. BOOSTXL-EDUMKII Educational BoosterPack
+    5. 2 MtF jumper wires
     
   Software
   
