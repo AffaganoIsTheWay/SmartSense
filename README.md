@@ -82,7 +82,7 @@ Project Layout
 ***
 Getting Started
 
-1. Connect NordicThingy: 52 and the BoosterpackXL boards to a power supply.
+1. 
 2. Ports P0.08 and P0.06 of NordicThingy: 52 are connected to ports J1.4 and J1.3 of the BoosterpackXL board respectively.
 3. Run nordic.c, texas.c
 ***
