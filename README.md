@@ -33,47 +33,29 @@ Project Layout
 
     SmartSense
     |
-    |── Nordic
+    |── Nordic               #Folder for the Nordic nRF52-DK project
     |     |
     |     |── src
     |     |     |
-    |     |     |── main.c
+    |     |     |── main.c   #Main file for Nordic nRF52-DK
     |     |
     |     |──CMakeLists. txt
-    |     |──prj.conf
+    |     |──prj.conf        #File that contain which Library the project shold contain
     |     |──sample.yaml
     |
     |──Texas_Instruments
     |     |
-    |     |── .launches
-    |     |       |
-    |     |       |── uart_example.launch
-    |     |
-    |     |── .settings
-    |     |       |
-    |     |       |── org.eclipse.cdt.codan.core.prefs
-    |     |       |── org.eclipse.cdt.debug.core.prefs
-    |     |       |── org.eclipse.core.resources.prefs
-    |     |
-    |     |──LcdDriver
-    |     |       |
-    |     |       |── Crystalfontz128x128_ST7735.c
-    |     |       |── Crystalfontz128x128_ST7735.h
-    |     |       |── HAL_MSP_EXP432P401R_Crystalfontz128x128_ST7735.c
-    |     |       |── HAL_MSP_EXP432P401R_Crystalfontz128x128_ST7735.h
-    |     |
-    |     |── targetConfigs
-    |     |       |
-    |     |       |── MSP432P401R.ccxml
-    |     |       |── readme.txt
-    |     |
-    |     |── .ccsproject
-    |     |── .cproject
-    |     |── .project
-    |     |── main.c
-    |     |── msp432p401r.cmd
-    |     |── startup_msp432p401r_ccs.c
-    |     |── startup_msp432p401r.c
+    |     |──launches
+    |     |──settings
+    |     |──LcdDriver      #Driver needed for the LCS screen
+    |     |──targetConfigs
+    |     |──.ccsproject
+    |     |──.cproject
+    |     |──.project
+    |     |──main.c        #Main file for MSP432P401R
+    |     |──msp432p401r.cmd
+    |     |──startup_msp432p401r_ccs.c
+    |     |──startup_msp432p401r.c
     |
     |── .gitignore
     |── PowerPointPresentation.pptx
