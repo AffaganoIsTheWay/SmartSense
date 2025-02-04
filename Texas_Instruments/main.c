@@ -173,11 +173,9 @@ void _hwInit()
     WDT_A_holdTimer();
     Interrupt_disableMaster();
 
-    /* Selecting P3.2 and P3.3 in UART mode and P1.0 as output (LED) */
+    /* Selecting P3.2 and P3.3 in UART mode */
         GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P3,
                  GPIO_PIN2 | GPIO_PIN3, GPIO_PRIMARY_MODULE_FUNCTION);
-        GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0);
-        GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0);
 
     /* Set the core voltage level to VCORE1 */
     PCM_setCoreVoltageLevel(PCM_VCORE1);
@@ -245,7 +243,7 @@ int main(void)
             sprintf(string, "%%");
             Graphics_drawStringCentered(&g_sContext, (int8_t *) string, 5, 80, 70, OPAQUE_TEXT);
         } else if (current_state == AIR){
-            sprintf(string, "Air Condition:");
+            sprintf(string, "CO2 Concentration:");
             Graphics_drawStringCentered(&g_sContext, (int8_t *) string,
                     AUTO_STRING_LENGTH, 64, 30, OPAQUE_TEXT);
 
