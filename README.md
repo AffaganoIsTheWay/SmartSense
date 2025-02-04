@@ -126,8 +126,8 @@ Illustrations
 ****
 Powerpoint Presentation & Video link
 
--Powerpoint: 
--Video: 
+    -Video:
+    -Power Point:
 ****
 Colaboratores
 
