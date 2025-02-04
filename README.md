@@ -64,9 +64,36 @@ Project Layout
 ***
 Getting Started
 
-1. 
-2. Ports P0.08 and P0.06 of NordicThingy: 52 are connected to ports J1.4 and J1.3 of the BoosterpackXL board respectively.
-3. Run nordic.c, texas.c
+1. Clone the repo using
+
+```
+git clone https://github.com/AffaganoIsTheWay/SmartSense.git
+```
+
+For the Texas Instrument board
+1. Import the Texas_Instrument folder in your local CCS Workspace
+2. Downloand and unzip TI driver Library (https://drive.google.com/file/d/1_5TsECed3wNJpIpllxYYdD06aFbkk7Fc/view)
+3. Open CSS and left click on Project Folder to select Properties
+4. Select CSS Build
+5. Click ARM Compiler and then Include Opt
+6. Add "simplelink_msp432p4_sdk_3_40_01_02/source" directory to "Add dir to #include search path" window
+7. Click ARM Linker and File Search Path
+8. Add "simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/ccs/msp432p4xx_driverlib.lib" to "Include library file..." window
+9. Add "simplelink_msp432p4_sdk_3_40_01_02/source/ti/grlib/lib/ccs/m4/grlib.a" to "Include library file..." window
+10. Import the Texas_Instrument folder in your local CCS Workspace
+11. Build and flash on the TI board
+
+For the Nordic Board
+1. Install the nRF Connect for VS Code Extension Pack (https://marketplace.visualstudio.com/items?itemName=nordic-semiconductor.nrf-connect-extension-pack)
+2. From the nRF connect tab install toolchain and SDK
+3. Download and install Segger j-link
+4. Open the nordic folder with VS code
+5. Build and Flash on the Nordic board
+
+For the Hardware
+1. Connect the Educational Boosterpack to the MSP432P401R
+2. Ports P0.08 and P0.06 of nRF52 are connected to ports J1.4 and J1.3 of the BoosterpackXL board respectively using the wires
+
 ***
 Illustrations
 
