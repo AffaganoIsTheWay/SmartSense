@@ -82,8 +82,7 @@ For the Texas Instruments MSP432 board
 7. Click ARM Linker and File Search Path
 8. Add "simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/ccs/msp432p4xx_driverlib.lib" to "Include library file..." window
 9. Add "simplelink_msp432p4_sdk_3_40_01_02/source/ti/grlib/lib/ccs/m4/grlib.a" to "Include library file..." window
-10. Import the Texas_Instrument folder in your local CCS Workspace
-11. Build and flash on the TI board
+10. Build and flash on the TI board
 
 For the Nordic nrf52dk Board
 1. Install the nRF Connect for VS Code Extension Pack (https://marketplace.visualstudio.com/items?itemName=nordic-semiconductor.nrf-connect-extension-pack)
