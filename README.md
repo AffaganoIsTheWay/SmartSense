@@ -134,4 +134,4 @@ Colaboratores
 - Giovanni Vitiello
 - Trisha Agrawal
 - Christian Li Sivertsen
-- Frederico Gasperi
+- Federico Gasperi
