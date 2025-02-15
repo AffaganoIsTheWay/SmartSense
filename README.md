@@ -12,14 +12,15 @@ Table of contents:
 ***
 Overview
 
-SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide concentration (ppm), humidity and temperature. Developed using Nordic nrf52 development kit, Nordic Thingy:52 and TI Educational BoosterPack MKII kits in C language, it can be deployed by any operating system. SmartSense is great for people who like to keep a constant update of their environment's condition. The bluetooth sensor of the Nordic Thingy:52 allows us to actively update the state of the environment according to time of request. The display and joystick from the BoosterPack kit displays them in a clear and intuitive way, with the joystick allowing the user to cycle through the values the user wants to see. 
+SmartSense is a technology aimed at detecting and displaying the Carbon Dioxide concentration (ppm), humidity and temperature. Developed using Nordic nrf52 development kit, Nordic Thingy:52 and TI Educational BoosterPack MKII kits in C language, it can be deployed by any operating system. SmartSense is great for people who like to keep a constant update of their environment's condition. The bluetooth sensor of the Nordic Thingy:52 allows us to actively update the state of the environment according to time of request. The display and joystick from the BoosterPack kit displays them in a clear and intuitive way, with the joystick allowing the user to cycle through the values the user wants to see. As an addition, the user will be notified when the air condition is too poor via a buzzing sound which can be switched off by either moving the joystick or pressing the button.
 ***
 Finite State Machine Diagram
 
 
 Working of MSP432 Boosterpack Developmental Kit:
 
-![WhatsApp Image 2025-02-04 at 19 39 52](https://github.com/user-attachments/assets/30cd4935-e904-4707-91aa-a64bb792935b)
+![WhatsApp Image 2025-02-15 at 17 48 09](https://github.com/user-attachments/assets/b07a4317-14d8-4856-944e-8fd03fc89aad)
+
 
 Working of NordicThingy 52 and Nordic nrf 52:
 
