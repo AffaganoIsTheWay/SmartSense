@@ -128,10 +128,10 @@ Illustrations
 Powerpoint Presentation & Video link
 
 - Demonstration video:
-  https://drive.google.com/file/d/1XCggXwoIA0TfUid-i-VX_US3aubdrWZ0/view?usp=share_link
-  https://drive.google.com/file/d/1XzOkUOkOIjTKxJzbG3huXRPEt_4kFogV/view?usp=drive_link
+- https://drive.google.com/file/d/1XCggXwoIA0TfUid-i-VX_US3aubdrWZ0/view?usp=share_link
+- https://drive.google.com/file/d/1XzOkUOkOIjTKxJzbG3huXRPEt_4kFogV/view?usp=drive_link
 - Power Point:
-  https://github.com/AffaganoIsTheWay/SmartSense/blob/873adc31c0c6759e1cb17bd6ead0c28609d2d425/SmartSense.pdf
+- https://github.com/AffaganoIsTheWay/SmartSense/blob/873adc31c0c6759e1cb17bd6ead0c28609d2d425/SmartSense.pdf
 ****
 Colaboratores
 
